@@ -5,3 +5,4 @@ if(NOT PLUGINS_DIR)
 endif()
 
 add_subdirectory("v2up")
+add_subdirectory("dailyupdate_example")

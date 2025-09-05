@@ -13,7 +13,7 @@ namespace smedley::clausewitz
      */
     class CFixedPoint
     {
-    protected:
+    public:
         int _val;
     };
 
