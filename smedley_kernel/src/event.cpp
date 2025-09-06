@@ -4,6 +4,7 @@
 #include "events/dailyupdate.hpp"
 #include "events/westernize.hpp"
 #include "events/monthlyupdate.hpp"
+#include "events/addtosphere.hpp"
 
 #define DECLARE_REGISTRY(Ev) \
     smedley::EventRegistry<Ev>::Handlers smedley::EventRegistry<Ev>::_handlers = smedley::EventRegistry<Ev>::Handlers{};
@@ -14,6 +15,7 @@ DECLARE_REGISTRY(ConsoleCmdManagerInitEvent);
 DECLARE_REGISTRY(DailyUpdateEvent);
 DECLARE_REGISTRY(WesternizeEvent);
 DECLARE_REGISTRY(MonthlyUpdateEvent);
+DECLARE_REGISTRY(AddToSphereEvent);
 
 namespace smedley
 {

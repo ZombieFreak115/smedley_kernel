@@ -3,8 +3,10 @@
 #include <smedley/events/dailyupdate.hpp>
 #include <smedley/events/westernize.hpp>
 #include <smedley/events/monthlyupdate.hpp>
+#include <smedley/events/addtosphere.hpp>
 #include <smedley/v2/gamestate.hpp>
 #include <smedley/v2/db/culture.hpp>
+#include <smedley/v2/db/country.hpp>
 
 namespace dailyupdate_example
 {
@@ -24,6 +26,8 @@ namespace dailyupdate_example
             AddEventHandler<smedley::events::DailyUpdateEvent>("on_daily_update_init", std::bind(&Plugin::OnDailyUpdate, this, std::placeholders::_1));
             AddEventHandler<smedley::events::WesternizeEvent>("on_westernize_update_init", std::bind(&Plugin::OnWesternize, this, std::placeholders::_1));
             AddEventHandler<smedley::events::MonthlyUpdateEvent>("on_monthly_update_init", std::bind(&Plugin::OnMonthlyUpdate, this, std::placeholders::_1));
+            AddEventHandler<smedley::events::AddToSphereEvent>("on_add_to_spehere_init", std::bind(&Plugin::OnAddToSphere, this, std::placeholders::_1));
+
         }
 
         void OnDailyUpdate(events::DailyUpdateEvent& e)
@@ -42,6 +46,14 @@ namespace dailyupdate_example
         {
             auto country = e.GetCountry();
             country->AddPrestige(clausewitz::CFixedPoint{ 1000000 });
+        }
+        void OnAddToSphere(events::AddToSphereEvent& e)
+        {
+            auto source = e.GetSource();
+            auto target = e.GetTarget();
+            auto ttarget = v2::CCountryDataBase::instance()->Get(*target);
+            source->AddPrestige(clausewitz::CFixedPoint{ 10000 });
+            ttarget->AddPrestige(clausewitz::CFixedPoint{ -10000 });
         }
     };
 

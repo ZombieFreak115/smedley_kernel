@@ -90,6 +90,7 @@ name = "AddToSphere"
 ret = "void"
 callconv = "__stdcall"
 offset = 0x00133e50
+doc="Is also called by the game on save load, but it seems to skip over alot of stuff when called that way."
 
     [[fns.args]]
     argtype = "const CCountryTag &"
