@@ -17,7 +17,7 @@ namespace smedley::events
     {
         v2::CCountry* _country;
         static void  HookTrampoline();
-        static constexpr uintptr_t hook_addr = 0x00142370;
+        static constexpr uintptr_t hook_addr = 0x0014238e;
         inline static uintptr_t hook_ret_addr = NULL;
     public:
         WesternizeEvent(v2::CCountry* country);

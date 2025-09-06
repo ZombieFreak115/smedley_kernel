@@ -21,15 +21,22 @@ namespace smedley::events
     void __declspec(naked) WesternizeEvent::HookTrampoline()
     {
         __asm {
-            // no need to do anything before the call as it is at the start of the func
+            // save context
+            push eax
+            push fs
+
+            // use free register to push the "this" country ptr as variable to func
+            mov ecx, [ebp+0x8]
+            push ecx
 
             call WesternizeEventHook
+            // restore context
+            pop ecx
+            pop fs
+            pop eax
 
             // patched instructions
-
-            push ebp
-            mov ebp, esp
-            mov eax, fs:0x0
+            cmp DWORD PTR ds : 0x125eadc, 0x0
 
             jmp hook_ret_addr
         }
@@ -45,7 +52,7 @@ namespace smedley::events
     void WesternizeEvent::InstallHook()
     {
         hook_ret_addr = memory::Map::base_addr + hook_addr + 5;
-        memory::Hook(memory::Map::base_addr + hook_addr, HookTrampoline, 9, nullptr);
+        memory::Hook(memory::Map::base_addr + hook_addr, HookTrampoline, 7, nullptr);
     }
 
 }
