@@ -9,21 +9,21 @@ namespace smedley::events
 {
 
     /**
-    When the daily update is executed, this event is notified
+    When the monthly update happens, this event is notified
      */
-    class DailyUpdateEvent : public Event
+    class MonthlyUpdateEvent : public Event
     {
         v2::CCountry* _country;
-        static constexpr uintptr_t hook_addr = 0x001085ae;
+        static void  HookTrampoline();
+        static constexpr uintptr_t hook_addr = 0x0010c2a6;
         inline static uintptr_t hook_ret_addr = NULL;
-        static void HookTrampoline();
-        
     public:
+        MonthlyUpdateEvent(v2::CCountry* country);
+
         v2::CCountry* GetCountry();
-        DailyUpdateEvent(v2::CCountry* country);
+
+
         /// @brief installs the hook needed to trigger the event
         static void InstallHook();
-
     };
-
 }

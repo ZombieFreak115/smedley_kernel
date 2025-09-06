@@ -2,6 +2,7 @@
 #include <smedley/eventregistry.hpp>
 #include <smedley/events/dailyupdate.hpp>
 #include <smedley/events/westernize.hpp>
+#include <smedley/events/monthlyupdate.hpp>
 #include <smedley/v2/gamestate.hpp>
 #include <smedley/v2/db/culture.hpp>
 
@@ -22,18 +23,13 @@ namespace dailyupdate_example
 
             AddEventHandler<smedley::events::DailyUpdateEvent>("on_daily_update_init", std::bind(&Plugin::OnDailyUpdate, this, std::placeholders::_1));
             AddEventHandler<smedley::events::WesternizeEvent>("on_westernize_update_init", std::bind(&Plugin::OnWesternize, this, std::placeholders::_1));
+            AddEventHandler<smedley::events::MonthlyUpdateEvent>("on_monthly_update_init", std::bind(&Plugin::OnMonthlyUpdate, this, std::placeholders::_1));
         }
 
         void OnDailyUpdate(events::DailyUpdateEvent& e)
         {
-            /*for (auto country : v2::CCurrentGameState::instance()->countries()) {
-                bool civ = country->Civilized();
-                if (!civ) {
-                    country->Westernize();
-                }
-                
-                country->SetResearchPoints(smedley::clausewitz::CFixedPoint{100000});
-            }*/
+            auto country = e.GetCountry();
+            country->AddPrestige(clausewitz::CFixedPoint{ 1000000 });
         }
         void OnWesternize(events::WesternizeEvent& e)
         {
@@ -41,6 +37,11 @@ namespace dailyupdate_example
 
             country->SetResearchPoints(smedley::clausewitz::CFixedPoint{ 1000000 });
             
+        }
+        void OnMonthlyUpdate(events::MonthlyUpdateEvent& e)
+        {
+            auto country = e.GetCountry();
+            country->AddPrestige(clausewitz::CFixedPoint{ 1000000 });
         }
     };
 
