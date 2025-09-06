@@ -1,6 +1,7 @@
 #include "hooks.hpp"
 #include "events/console.hpp"
 #include "events/dailyupdate.hpp"
+#include "events/westernize.hpp"
 
 namespace smedley
 {
@@ -12,6 +13,7 @@ namespace smedley
         // event hooks
         ConsoleCmdManagerInitEvent::InstallHook();
         DailyUpdateEvent::InstallHook();
+        WesternizeEvent::InstallHook();
     }
 
 }

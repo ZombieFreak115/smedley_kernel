@@ -19,12 +19,17 @@ namespace dailyupdate_example
         {
             logger().Info("Loading daily update example");
 
-            AddEventHandler<smedley::events::DailyUpdateEvent>("on_daily_update_init", std::bind(&Plugin::OnDailyUpdate, this));
+            AddEventHandler<smedley::events::DailyUpdateEvent>("on_daily_update_init", std::bind(&Plugin::OnDailyUpdate, this, std::placeholders::_1));
         }
 
-        void OnDailyUpdate()
+        void OnDailyUpdate(events::DailyUpdateEvent& e)
         {
             for (auto country : v2::CCurrentGameState::instance()->countries()) {
+                bool civ = country->Civilized();
+                if (!civ) {
+                    country->Westernize();
+                }
+                
                 country->SetResearchPoints(smedley::clausewitz::CFixedPoint{100000});
             }
         }

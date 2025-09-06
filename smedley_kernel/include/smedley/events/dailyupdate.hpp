@@ -9,11 +9,15 @@ namespace smedley::events
      */
     class DailyUpdateEvent : public Event
     {
+        static constexpr uintptr_t hook_addr = 0x00108590;
+        inline static uintptr_t hook_ret_addr = NULL;
+        static void HookTrampoline();
+        
     public:
         DailyUpdateEvent();
-        /// @brief returns the console command manager being initalized
         /// @brief installs the hook needed to trigger the event
         static void InstallHook();
+
     };
 
 }

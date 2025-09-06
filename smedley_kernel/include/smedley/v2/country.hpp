@@ -595,6 +595,7 @@ namespace smedley::v2
         //[[[end]]]
 
         inline bool exists() const { return _owned_provinces.size() > 0; }
+        bool Civilized() const { return _is_civilized; }
     };
 
     static_assert(sizeof(CCountry) == 0x1608);

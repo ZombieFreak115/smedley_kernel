@@ -16,6 +16,9 @@ namespace smedley::events
     class ConsoleCmdManagerInitEvent : public Event
     {
         v2::CConsoleCmdManager *_cmd_mgr;
+        static constexpr uintptr_t hook_addr = 0x00023a43;
+        inline static uintptr_t hook_ret_addr = NULL;
+        static void HookTrampoline();
     public:
         ConsoleCmdManagerInitEvent(v2::CConsoleCmdManager *cmd_mgr);
         /// @brief returns the console command manager being initalized

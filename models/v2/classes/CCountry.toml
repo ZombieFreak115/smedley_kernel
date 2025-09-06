@@ -627,6 +627,7 @@ name = "Westernize"
 ret = "void"
 callconv = "__stdcall"
 offset = 0x00142370
+doc = "Will CRASH if called on a country that is already civilized"
 
 [[fns]]
 name = "WithdrawFromTreasury"
