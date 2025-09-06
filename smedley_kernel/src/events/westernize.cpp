@@ -2,12 +2,15 @@
 #include "memory.hpp"
 #include "events/westernize.hpp"
 
-class CCountry;
+
+namespace smedley::v2 {
+    class CCountry;
+}
 
 using namespace smedley;
 
 
-void WesternizeEventHook(CCountry* country)
+void WesternizeEventHook(v2::CCountry* country)
 {
     smedley::EventRegistry<events::WesternizeEvent>::Notify(events::WesternizeEvent(country));
 }
@@ -32,11 +35,11 @@ namespace smedley::events
         }
     }
 
-    WesternizeEvent::WesternizeEvent(CCountry* country) : Event(false)
+    WesternizeEvent::WesternizeEvent(v2::CCountry* country) : Event(false)
     {
         _country = country;
     }
-    CCountry* WesternizeEvent::GetCountry() {
+    v2::CCountry* WesternizeEvent::GetCountry() {
         return _country;
     }
     void WesternizeEvent::InstallHook()

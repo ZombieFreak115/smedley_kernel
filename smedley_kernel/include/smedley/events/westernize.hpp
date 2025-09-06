@@ -1,7 +1,11 @@
 #pragma once
 #include "../event.hpp"
 
-class CCountry;
+namespace smedley::v2 {
+    class CCountry;
+}
+
+
 
 namespace smedley::events
 {
@@ -11,15 +15,15 @@ namespace smedley::events
      */
     class WesternizeEvent : public Event
     {
-        CCountry* _country;
+        v2::CCountry* _country;
         static void  HookTrampoline();
         static constexpr uintptr_t hook_addr = 0x00142370;
         inline static uintptr_t hook_ret_addr = NULL;
     public:
-        WesternizeEvent(CCountry* country);
+        WesternizeEvent(v2::CCountry* country);
 
         /// @brief returns the westernizing country
-        CCountry* GetCountry();
+        v2::CCountry* GetCountry();
 
         /// @brief installs the hook needed to trigger the event
         static void InstallHook();
