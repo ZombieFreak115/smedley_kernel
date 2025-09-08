@@ -7,6 +7,9 @@
 #include <smedley/v2/gamestate.hpp>
 #include <smedley/v2/db/culture.hpp>
 #include <smedley/v2/db/country.hpp>
+#include <smedley/v2/trait.hpp>
+#include <smedley/v2/traitdefinition.hpp>
+#include <smedley/v2/leader.hpp>
 
 namespace dailyupdate_example
 {
