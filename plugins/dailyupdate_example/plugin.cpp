@@ -10,6 +10,7 @@
 #include <smedley/v2/trait.hpp>
 #include <smedley/v2/traitdefinition.hpp>
 #include <smedley/v2/leader.hpp>
+#include <smedley/v2/db/traitdefinition.hpp>
 
 namespace dailyupdate_example
 {
